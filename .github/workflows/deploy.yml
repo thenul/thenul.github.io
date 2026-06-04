@@ -21,15 +21,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-          
-      - name: Clean Replit Catalogs
-        run: sed -i 's/"catalog:[^"]*"/"latest"/g' package.json
+          cache: pnpm
 
-      - run: npm install
-      - run: npm run build
+      - run: pnpm install
+      - run: pnpm run build
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
