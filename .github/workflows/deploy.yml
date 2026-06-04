@@ -24,6 +24,10 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
+          
+      - name: Clean Replit Catalogs
+        run: sed -i 's/"catalog:[^"]*"/"latest"/g' package.json
+
       - run: npm install
       - run: npm run build
       - uses: actions/upload-pages-artifact@v3
