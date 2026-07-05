@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100%" height="100%">
+  <defs>
+    <linearGradient id="cyber-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00f2fe" />
+      <stop offset="100%" stop-color="#4facfe" />
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+  <!-- Background hex/circuit path -->
+  <path d="M 50 12 L 83 31 L 83 69 L 50 88 L 17 69 L 17 31 Z" fill="none" stroke="url(#cyber-grad)" stroke-width="2" opacity="0.3" />
+  <!-- Glowing "T" -->
+  <g filter="url(#glow)">
+    <!-- Top bar -->
+    <path d="M 28 32 L 72 32" stroke="url(#cyber-grad)" stroke-width="8" stroke-linecap="round" />
+    <!-- Vertical stem -->
+    <path d="M 50 32 L 50 72" stroke="url(#cyber-grad)" stroke-width="8" stroke-linecap="round" />
+    <!-- Dots for technical connections -->
+    <circle cx="50" cy="72" r="4" fill="#00f2fe" />
+    <circle cx="28" cy="32" r="3" fill="#4facfe" />
+    <circle cx="72" cy="32" r="3" fill="#4facfe" />
+  </g>
+</svg>

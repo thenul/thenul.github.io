@@ -4,6 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { Navbar } from "./components/Navbar";
 import { HeroSection } from "./sections/HeroSection";
 import { AboutSection } from "./sections/AboutSection";
+import { CertificatesSection } from "./sections/CertificatesSection";
 import { SkillsSection } from "./sections/SkillsSection";
 import { ProjectsSection } from "./sections/ProjectsSection";
 import { ContactSection } from "./sections/ContactSection";
@@ -19,6 +20,7 @@ function App() {
           <main>
             <HeroSection />
             <AboutSection />
+            <CertificatesSection />
             <SkillsSection />
             <ProjectsSection />
           </main>
