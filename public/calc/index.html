@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EE 101 Impedance Calculator</title>
+    <title>PhasorZ — Impedance Calculator</title>
     <style>
         :root {
-            --bg-color: #121214;
+            --bg-color: #0d0e12;
             --card-bg: #1a1a1e;
             --accent: #6366f1;
             --accent-hover: #4f46e5;
@@ -21,282 +21,307 @@
             color: var(--text);
             margin: 0;
             padding: 20px;
+            min-height: 100vh;
             display: flex;
             justify-content: center;
+            align-items: center;
+            box-sizing: border-box;
+
+            /* Technical Grid + Subtle Center Glow */
+            background-image: 
+                radial-gradient(circle at center, rgba(99, 102, 241, 0.18) 0%, transparent 60%),
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 100% 100%, 32px 32px, 32px 32px;
+            background-position: 0 0, -1px -1px, -1px -1px;
         }
 
         .container {
-            width: 100%;
-            max-width: 500px;
             background: var(--card-bg);
             border: 1px solid var(--border);
             border-radius: 12px;
             padding: 24px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 360px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
         }
 
-        h1 {
-            font-size: 1.5rem;
-            margin-top: 0;
-            text-align: center;
-            color: #fff;
-            border-bottom: 1px solid var(--border);
+        h1 { 
+            font-size: 1.4rem; 
+            margin-top: 0; 
+            text-align: center; 
+            color: #fff; 
+            border-bottom: 1px solid var(--border); 
             padding-bottom: 12px;
+            margin-bottom: 16px;
+            letter-spacing: -0.5px;
         }
 
-        .section {
-            margin-bottom: 20px;
+        label { 
+            display: block; 
+            font-size: 0.8rem; 
+            color: var(--text-muted); 
+            margin-bottom: 4px; 
         }
 
-        label {
-            display: block;
-            font-size: 0.875rem;
-            color: var(--text-muted);
-            margin-bottom: 6px;
+        input, select { 
+            width: 100%; 
+            padding: 10px; 
+            background: #09090b; 
+            border: 1px solid var(--border); 
+            border-radius: 6px; 
+            color: #fff; 
+            font-size: 0.9rem; 
+            box-sizing: border-box; 
+            margin-bottom: 12px; 
+            transition: border-color 0.2s;
         }
 
-        input, select {
-            width: 100%;
-            padding: 10px;
-            background: #09090b;
-            border: 1px solid var(--border);
-            border-radius: 6px;
-            color: #fff;
-            font-size: 1rem;
-            box-sizing: border-box;
-            margin-bottom: 12px;
+        input:focus, select:focus { 
+            outline: none; 
+            border-color: var(--accent); 
         }
 
-        input:focus, select:focus {
-            outline: none;
-            border-color: var(--accent);
-        }
-
-        button {
-            width: 100%;
-            padding: 12px;
-            background: var(--accent);
-            border: none;
-            border-radius: 6px;
-            color: #fff;
-            font-weight: 600;
-            cursor: pointer;
+        button { 
+            width: 100%; 
+            padding: 11px; 
+            background: var(--accent); 
+            border: none; 
+            border-radius: 6px; 
+            color: #fff; 
+            font-weight: 600; 
+            cursor: pointer; 
             transition: background 0.2s;
         }
 
-        button:hover {
-            background: var(--accent-hover);
+        button:hover { 
+            background: var(--accent-hover); 
         }
 
-        button.secondary {
-            background: #27272a;
-            border: 1px solid var(--border);
+        button.secondary { 
+            background: #27272a; 
+            border: 1px solid var(--border); 
+            margin-top: 12px; 
         }
 
-        button.secondary:hover {
-            background: #3f3f46;
+        button.secondary:hover { 
+            background: #3f3f46; 
         }
 
-        .display-box {
-            background: #09090b;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 16px;
-            margin-top: 20px;
+        .display-box { 
+            background: #09090b; 
+            border: 1px solid var(--border); 
+            border-radius: 8px; 
+            padding: 14px; 
+            margin-top: 14px; 
         }
 
-        .result-line {
-            font-family: monospace;
-            font-size: 1.1rem;
-            margin: 6px 0;
+        .result-line { 
+            font-family: 'Courier New', Courier, monospace; 
+            font-size: 0.95rem; 
+            margin: 6px 0; 
+            word-break: break-all;
         }
 
-        .error {
-            color: #ef4444;
-            font-size: 0.875rem;
-            margin-top: -6px;
-            margin-bottom: 12px;
-            display: none;
+        .error { 
+            color: #ef4444; 
+            font-size: 0.75rem; 
+            margin-top: -8px; 
+            margin-bottom: 10px; 
+            display: none; 
+        }
+
+        .footer { 
+            text-align: center; 
+            font-size: 0.75rem; 
+            color: var(--text-muted); 
+            margin-top: 18px; 
+            border-top: 1px solid var(--border); 
+            padding-top: 10px; 
+        }
+
+        .footer-name { 
+            color: var(--accent); 
+            font-weight: bold; 
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>EE 101 Impedance Calculator</h1>
+    <h1>PhasorZ</h1>
     
-    <!-- Frequency Setup -->
-    <div class="section">
-        <label for="frequency">System Frequency (Hz) e.g., 50, 1k, 10u</label>
-        <input type="text" id="frequency" value="1k" onchange="lockFrequency()">
-        <div id="freq-error" class="error">Invalid frequency format</div>
-    </div>
+    <label for="frequency">System Frequency (Hz)</label>
+    <input type="text" id="frequency" value="1k">
+    <div id="freq-error" class="error">Invalid frequency format</div>
 
-    <!-- Add Component Form -->
-    <div class="section" id="component-form">
-        <label for="comp-type">Component Type</label>
-        <select id="comp-type">
-            <option value="R">Resistor (Ω)</option>
-            <option value="L">Inductor (H)</option>
-            <option value="C">Capacitor (F)</option>
+    <label for="comp-type">Component Type</label>
+    <select id="comp-type">
+        <option value="R">Resistor (Ω)</option>
+        <option value="L">Inductor (H)</option>
+        <option value="C">Capacitor (F)</option>
+    </select>
+
+    <label for="comp-value">Value (e.g., 4.7k, 10u)</label>
+    <input type="text" id="comp-value" placeholder="e.g., 4.7k">
+    <div id="val-error" class="error">Invalid value format</div>
+
+    <div id="connection-container" style="display: none;">
+        <label for="comp-conn">Connection Type</label>
+        <select id="comp-conn">
+            <option value="s">Series</option>
+            <option value="p">Parallel</option>
         </select>
-
-        <label for="comp-value">Value (e.g., 220, 4.7k, 10u)</label>
-        <input type="text" id="comp-value" placeholder="e.g., 4.7k">
-        <div id="val-error" class="error">Invalid value format</div>
-
-        <div id="connection-container" style="display: none;">
-            <label for="comp-conn">Connection Type</label>
-            <select id="comp-conn">
-                <option value="s">Series</option>
-                <option value="p">Parallel</option>
-            </select>
-        </div>
-
-        <button onclick="addComponent()">Add Component</button>
     </div>
 
-    <!-- Output Box -->
+    <button id="add-btn">Add Component</button>
+
     <div class="display-box">
-        <label>Running Total Network Impedance:</label>
         <div class="result-line" id="rect-output">Rectangular: 0.00 + 0.00j Ω</div>
         <div class="result-line" id="polar-output">Polar: 0.00 ∠ 0.00°</div>
-        <div style="margin-top: 12px; font-size: 0.8rem; color: var(--text-muted);" id="freq-display">Frequency: 1,000.00 Hz</div>
+        <div style="margin-top: 8px; font-size: 0.75rem; color: var(--text-muted);" id="freq-display">Frequency: 1,000.00 Hz</div>
     </div>
 
-    <button class="secondary" style="margin-top: 16px;" onclick="resetSystem()">Reset Network</button>
+    <button class="secondary" id="reset-btn">Reset Network</button>
+    
+    <div class="footer">
+        Created by <span class="footer-name">TDM</span>
+    </div>
 </div>
 
 <script>
-    // State Variables
-    let totalZ = null; // null means empty network
-    let sysFrequency = 1000;
+let totalZ = null; 
+let sysFrequency = 1000;
 
-    const prefixes = { 'p': 1e-12, 'n': 1e-9, 'u': 1e-6, 'm': 1e-3, 'k': 1e3, 'M': 1e6, 'G': 1e9 };
+const prefixes = { 'p': 1e-12, 'n': 1e-9, 'u': 1e-6, 'm': 1e-3, 'k': 1e3, 'M': 1e6, 'G': 1e9 };
 
-    function parseEngineeringNotation(str) {
-        str = str.trim();
-        if (!str) throw new Error("Empty");
-        const lastChar = str.slice(-1);
-        if (prefixes[lastChar]) {
-            const numPart = parseFloat(str.slice(0, -1));
-            if (isNaN(numPart)) throw new Error("NaN");
-            return numPart * prefixes[lastChar];
-        }
-        const num = parseFloat(str);
-        if (isNaN(num)) throw new Error("NaN");
-        return num;
+function parseEngineeringNotation(str) {
+    str = str.trim();
+    if (!str) throw new Error("Empty");
+    const lastChar = str.slice(-1);
+    if (prefixes[lastChar]) {
+        const numPart = parseFloat(str.slice(0, -1));
+        if (isNaN(numPart)) throw new Error("NaN");
+        return numPart * prefixes[lastChar];
+    }
+    const num = parseFloat(str);
+    if (isNaN(num)) throw new Error("NaN");
+    return num;
+}
+
+function lockFrequency() {
+    const input = document.getElementById('frequency').value;
+    const errorDiv = document.getElementById('freq-error');
+    try {
+        const val = parseEngineeringNotation(input);
+        if (val < 0) throw new Error("Negative");
+        sysFrequency = val;
+        errorDiv.style.display = 'none';
+        document.getElementById('freq-display').innerText = `Frequency: ${sysFrequency.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})} Hz`;
+        resetSystem(); 
+    } catch (e) {
+        errorDiv.style.display = 'block';
+    }
+}
+
+function reciprocal(z) {
+    if (z.re === Infinity || z.im === Infinity) return { re: 0, im: 0 };
+    const denom = z.re * z.re + z.im * z.im;
+    if (denom === 0) return { re: Infinity, im: 0 };
+    return { re: z.re / denom, im: -z.im / denom };
+}
+
+function addComponent() {
+    const type = document.getElementById('comp-type').value;
+    const valStr = document.getElementById('comp-value').value;
+    const conn = document.getElementById('comp-conn').value;
+    const errorDiv = document.getElementById('val-error');
+
+    let val;
+    try {
+        val = parseEngineeringNotation(valStr);
+        if (val < 0) throw new Error("Negative");
+        errorDiv.style.display = 'none';
+    } catch (e) {
+        errorDiv.style.display = 'block';
+        return;
     }
 
-    function lockFrequency() {
-        const input = document.getElementById('frequency').value;
-        const errorDiv = document.getElementById('freq-error');
-        try {
-            const val = parseEngineeringNotation(input);
-            if (val < 0) throw new Error("Negative");
-            sysFrequency = val;
-            errorDiv.style.display = 'none';
-            document.getElementById('freq-display').innerText = `Frequency: ${sysFrequency.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})} Hz`;
-            resetSystem();
-        } catch (e) {
-            errorDiv.style.display = 'block';
-        }
-    }
+    let newZ = { re: 0, im: 0 };
+    const omega = 2 * Math.PI * sysFrequency;
 
-    // Complex Number Helpers {re: float, im: float}
-    function reciprocal(z) {
-        if (z.re === Infinity || z.im === Infinity) return { re: 0, im: 0 };
-        const denom = z.re * z.re + z.im * z.im;
-        if (denom === 0) return { re: Infinity, im: 0 };
-        return { re: z.re / denom, im: -z.im / denom };
-    }
-
-    function addComponent() {
-        const type = document.getElementById('comp-type').value;
-        const valStr = document.getElementById('comp-value').value;
-        const conn = document.getElementById('comp-conn').value;
-        const errorDiv = document.getElementById('val-error');
-
-        let val;
-        try {
-            val = parseEngineeringNotation(valStr);
-            if (val < 0) throw new Error("Negative");
-            errorDiv.style.display = 'none';
-        } catch (e) {
-            errorDiv.style.display = 'block';
-            return;
-        }
-
-        let newZ = { re: 0, im: 0 };
-        const omega = 2 * Math.PI * sysFrequency;
-
-        if (type === 'R') {
-            newZ.re = val;
-        } else if (type === 'L') {
-            newZ.im = omega * val;
-        } else if (type === 'C') {
-            if (omega === 0) {
-                newZ.re = Infinity;
-            } else {
-                newZ.im = -1 / (omega * val);
-            }
-        }
-
-        // Update Network State
-        if (totalZ === null) {
-            totalZ = newZ;
-            document.getElementById('connection-container').style.display = 'block';
-            document.getElementById('frequency').disabled = true;
+    if (type === 'R') {
+        newZ.re = val;
+    } else if (type === 'L') {
+        newZ.im = omega * val;
+    } else if (type === 'C') {
+        if (omega === 0) {
+            newZ.re = Infinity;
         } else {
-            if (conn === 's') {
-                totalZ.re += newZ.re;
-                totalZ.im += newZ.im;
+            newZ.im = -1 / (omega * val);
+        }
+    }
+
+    if (totalZ === null) {
+        totalZ = newZ;
+        document.getElementById('connection-container').style.display = 'block';
+        document.getElementById('frequency').disabled = true;
+    } else {
+        if (conn === 's') {
+            totalZ.re += newZ.re;
+            totalZ.im += newZ.im;
+        } else {
+            if ((totalZ.re === 0 && totalZ.im === 0) || (newZ.re === 0 && newZ.im === 0)) {
+                totalZ = { re: 0, im: 0 };
             } else {
-                if ((totalZ.re === 0 && totalZ.im === 0) || (newZ.re === 0 && newZ.im === 0)) {
-                    totalZ = { re: 0, im: 0 };
-                } else {
-                    const y1 = reciprocal(totalZ);
-                    const y2 = reciprocal(newZ);
-                    const yTotal = { re: y1.re + y2.re, im: y1.im + y2.im };
-                    totalZ = reciprocal(yTotal);
-                }
+                const y1 = reciprocal(totalZ);
+                const y2 = reciprocal(newZ);
+                const yTotal = { re: y1.re + y2.re, im: y1.im + y2.im };
+                totalZ = reciprocal(yTotal);
             }
         }
-
-        updateDisplay();
-        document.getElementById('comp-value').value = ''; 
     }
 
-    function updateDisplay() {
-        const rectEl = document.getElementById('rect-output');
-        const polarEl = document.getElementById('polar-output');
+    updateDisplay();
+    document.getElementById('comp-value').value = ''; 
+}
 
-        if (totalZ === null) {
-            rectEl.innerText = "Rectangular: 0.00 + 0.00j Ω";
-            polarEl.innerText = "Polar: 0.00 ∠ 0.00°";
-            return;
-        }
+function updateDisplay() {
+    const rectEl = document.getElementById('rect-output');
+    const polarEl = document.getElementById('polar-output');
 
-        if (totalZ.re === Infinity || Math.abs(totalZ.re) > 1e12 || Math.abs(totalZ.im) > 1e12) {
-            rectEl.innerText = "Rectangular: ∞ Ω (Open Circuit)";
-            polarEl.innerText = "Polar: ∞ ∠ 0.00°";
-            return;
-        }
-
-        const sign = totalZ.im >= 0 ? '+' : '-';
-        rectEl.innerText = `Rectangular: ${totalZ.re.toFixed(2)} ${sign} ${Math.abs(totalZ.im).toFixed(2)}j Ω`;
-
-        const mag = Math.sqrt(totalZ.re * totalZ.re + totalZ.im * totalZ.im);
-        let angle = Math.atan2(totalZ.im, totalZ.re) * (180 / Math.PI);
-        polarEl.innerText = `Polar: ${mag.toFixed(2)} ∠ ${angle.toFixed(2)}°`;
+    if (totalZ === null) {
+        rectEl.innerText = "Rectangular: 0.00 + 0.00j Ω";
+        polarEl.innerText = "Polar: 0.00 ∠ 0.00°";
+        return;
     }
 
-    function resetSystem() {
-        totalZ = null;
-        document.getElementById('connection-container').style.display = 'none';
-        document.getElementById('frequency').disabled = false;
-        updateDisplay();
+    if (totalZ.re === Infinity || Math.abs(totalZ.re) > 1e12 || Math.abs(totalZ.im) > 1e12) {
+        rectEl.innerText = "Rectangular: ∞ Ω (Open Circuit)";
+        polarEl.innerText = "Polar: ∞ ∠ 0.00°";
+        return;
     }
+
+    const sign = totalZ.im >= 0 ? '+' : '-';
+    rectEl.innerText = `Rectangular: ${totalZ.re.toFixed(2)} ${sign} ${Math.abs(totalZ.im).toFixed(2)}j Ω`;
+
+    const mag = Math.sqrt(totalZ.re * totalZ.re + totalZ.im * totalZ.im);
+    let angle = Math.atan2(totalZ.im, totalZ.re) * (180 / Math.PI);
+    polarEl.innerText = `Polar: ${mag.toFixed(2)} ∠ ${angle.toFixed(2)}°`;
+}
+
+function resetSystem() {
+    totalZ = null;
+    document.getElementById('connection-container').style.display = 'none';
+    document.getElementById('frequency').disabled = false;
+    updateDisplay();
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('frequency').addEventListener('change', lockFrequency);
+    document.getElementById('add-btn').addEventListener('click', addComponent);
+    document.getElementById('reset-btn').addEventListener('click', resetSystem);
+});
 </script>
 
 </body>
