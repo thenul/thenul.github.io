@@ -14,7 +14,7 @@ export function HeroSection() {
           initial={{ scale: 0.8, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="relative w-32 h-32 md:w-40 md:h-40 mb-8 rounded-full flex items-center justify-center glow-primary bg-[#161922]/50 border border-cyan-500/20"
+          className="relative w-32 h-32 md:w-40 md:h-40 mb-8 rounded-full flex items-center justify-center bg-[#161B26]/50 border border-slate-800"
         >
           <Cpu className="w-12 h-12 text-primary" />
           <div className="absolute inset-0 rounded-full border border-transparent animate-[spin_10s_linear_infinite]" style={{ borderTopColor: 'rgba(56,189,248,0.8)', borderRightColor: 'rgba(59,130,246,0.2)' }} />
@@ -25,7 +25,7 @@ export function HeroSection() {
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-5xl md:text-7xl font-bold tracking-tighter mb-4 text-transparent bg-clip-text bg-gradient-to-r from-white via-cyan-100 to-white"
+          className="text-5xl md:text-7xl font-bold tracking-tighter mb-4 text-slate-100"
         >
           Thenul De Mel
         </motion.h1>
@@ -34,7 +34,7 @@ export function HeroSection() {
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="text-xl md:text-3xl font-medium tracking-wide mb-6 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500"
+          className="text-xl md:text-3xl font-medium tracking-wide mb-6 text-primary"
         >
           Electronics Engineering @ UTS
         </motion.h2>
@@ -43,7 +43,7 @@ export function HeroSection() {
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="text-muted-foreground max-w-2xl text-lg md:text-xl"
+          className="text-slate-400 max-w-2xl text-lg md:text-xl font-light"
         >
           Building precise, purposeful hardware. Bridging the gap between silicon, embedded systems, and space technology.
         </motion.p>

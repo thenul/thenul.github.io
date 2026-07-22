@@ -3,16 +3,16 @@ import { Github, Linkedin, Mail } from 'lucide-react';
 
 export function ContactSection() {
   return (
-    <footer id="contact" className="border-t border-white/5 bg-background py-12">
+    <footer id="contact" className="border-t border-slate-800 bg-[#0b0f17] py-12">
       <div className="max-w-5xl mx-auto px-6 flex flex-col items-center">
-        <h2 className="text-2xl font-bold mb-8 font-['Space_Grotesk'] text-primary">Get in touch</h2>
+        <h2 className="text-2xl font-bold mb-8 font-['Space_Grotesk'] text-slate-100">Get in touch</h2>
         
         <div className="flex items-center gap-8 mb-12">
           <a
             href="https://github.com/thenul"
             target="_blank"
             rel="noopener noreferrer"
-            className="p-3 rounded-full bg-secondary border border-white/5 text-muted-foreground hover:text-primary hover:border-primary/50 transition-all"
+            className="p-3 rounded-full bg-[#161B26] border border-slate-800 text-slate-400 hover:text-slate-100 hover:border-slate-700 transition-all cursor-pointer"
             aria-label="GitHub"
             data-testid="link-github"
           >
@@ -22,7 +22,7 @@ export function ContactSection() {
             href="https://www.linkedin.com/in/thenul-de-mel-01154a203/"
             target="_blank"
             rel="noopener noreferrer"
-            className="p-3 rounded-full bg-secondary border border-white/5 text-muted-foreground hover:text-primary hover:border-primary/50 transition-all"
+            className="p-3 rounded-full bg-[#161B26] border border-slate-800 text-slate-400 hover:text-slate-100 hover:border-slate-700 transition-all cursor-pointer"
             aria-label="LinkedIn"
             data-testid="link-linkedin"
           >
@@ -30,7 +30,7 @@ export function ContactSection() {
           </a>
           <a
             href="mailto:thenuldemelde@gmail.com"
-            className="p-3 rounded-full bg-secondary border border-white/5 text-muted-foreground hover:text-primary hover:border-primary/50 transition-all"
+            className="p-3 rounded-full bg-[#161B26] border border-slate-800 text-slate-400 hover:text-slate-100 hover:border-slate-700 transition-all cursor-pointer"
             aria-label="Email"
             data-testid="link-email"
           >
@@ -38,7 +38,7 @@ export function ContactSection() {
           </a>
         </div>
 
-        <p className="text-sm text-muted-foreground/50 font-mono">
+        <p className="text-sm text-slate-500 font-mono">
           © 2025 Thenul De Mel. All rights reserved.
         </p>
       </div>

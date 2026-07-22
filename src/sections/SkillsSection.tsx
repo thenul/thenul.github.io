@@ -23,7 +23,7 @@ export function SkillsSection() {
   };
 
   return (
-    <section id="skills" className="py-24 bg-card/30 border-y border-white/5">
+    <section id="skills" className="py-24 bg-[#0b0f17]/30 border-y border-slate-800">
       <div className="max-w-5xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -32,11 +32,11 @@ export function SkillsSection() {
           transition={{ duration: 0.6 }}
           className="mb-12"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500 flex items-center gap-4">
-            <span className="w-8 h-[2px] bg-gradient-to-r from-cyan-400 to-blue-500 block" />
+          <h2 className="text-3xl md:text-4xl font-bold text-slate-100 flex items-center gap-4 font-['Space_Grotesk']">
+            <span className="w-8 h-[2px] bg-slate-200 block" />
             Skills
           </h2>
-          <p className="mt-3 text-sm font-mono text-muted-foreground/50">
+          <p className="mt-3 text-sm font-mono text-slate-450">
             Click any skill to see proficiency
           </p>
         </motion.div>
@@ -58,17 +58,17 @@ export function SkillsSection() {
                 variants={item}
                 layout
                 onClick={() => setActiveSkill(isActive ? null : skill.name)}
-                whileHover={{ scale: 1.04 }}
-                whileTap={{ scale: 0.97 }}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
                 data-testid={`skill-${skill.name.toLowerCase().replace(/ /g, '-')}`}
                 className={`relative cursor-pointer rounded-lg border transition-all duration-300 overflow-hidden select-none
                   ${isActive
-                    ? `border-cyan-500/50 ${colors.bg} shadow-[0_0_20px_-4px_rgba(0,210,255,0.35)]`
-                    : 'border-white/10 bg-secondary hover:border-cyan-500/30 hover:shadow-[0_0_15px_-6px_rgba(0,210,255,0.25)]'
+                    ? `border-cyan-500/40 bg-[#1e293b] shadow-md`
+                    : 'border-slate-800 bg-[#161B26] hover:border-slate-700'
                   }`}
               >
                 {/* Chip label */}
-                <div className="px-5 py-2.5 font-mono text-sm text-secondary-foreground whitespace-nowrap flex items-center gap-2">
+                <div className="px-5 py-2.5 font-mono text-sm text-slate-100 whitespace-nowrap flex items-center gap-2">
                   <span>{skill.name}</span>
                   <span className={`text-xs font-semibold ${colors.text} opacity-70`}>
                     {skill.level}
@@ -89,7 +89,7 @@ export function SkillsSection() {
                         <span className={`text-xs font-mono font-bold ${colors.text}`}>
                           {skill.level}
                         </span>
-                        <span className="text-xs font-mono text-muted-foreground/60">
+                        <span className="text-xs font-mono text-slate-400">
                           {skill.percent}%
                         </span>
                       </div>
@@ -98,7 +98,7 @@ export function SkillsSection() {
                           initial={{ width: 0 }}
                           animate={{ width: `${skill.percent}%` }}
                           transition={{ duration: 0.6, ease: 'easeOut', delay: 0.05 }}
-                          className={`h-full rounded-full bg-gradient-to-r ${colors.bar} shadow-[0_0_8px_0px_rgba(0,210,255,0.6)]`}
+                          className={`h-full rounded-full bg-gradient-to-r ${colors.bar}`}
                         />
                       </div>
                     </motion.div>
@@ -120,7 +120,7 @@ export function SkillsSection() {
           {(Object.entries(levelColors) as [SkillLevel, typeof levelColors[SkillLevel]][]).map(([level, c]) => (
             <div key={level} className="flex items-center gap-2">
               <div className={`w-3 h-3 rounded-full bg-gradient-to-r ${c.bar}`} />
-              <span className="text-xs font-mono text-muted-foreground/50">{level}</span>
+              <span className="text-xs font-mono text-slate-500">{level}</span>
             </div>
           ))}
         </motion.div>

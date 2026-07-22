@@ -51,39 +51,39 @@
 }
 
 :root {
-  /* Matte Dark Charcoal Background (#0D0F14) */
-  --background: 222 30% 6%;
-  /* High-Contrast Off-White (#E2E8F0) */
-  --foreground: 214 32% 91%;
+  /* Matte Dark Charcoal Background (#0B0F17) */
+  --background: 220 35% 7%;
+  /* High-Contrast Off-White (#F1F5F9) */
+  --foreground: 210 40% 96%;
 
-  /* Flat Borders - Zinc 800 (#27272a) */
-  --border: 240 5% 16%;
-  --input: 240 5% 16%;
+  /* Flat Borders - Slate 800 (#1e293b) */
+  --border: 215 25% 17%;
+  --input: 215 25% 17%;
   /* Accent Electric Cyan (#38BDF8) */
   --ring: 199 95% 60%;
 
-  /* Card Background - Charcoal (#161922) */
-  --card: 223 21% 11%;
-  --card-foreground: 214 32% 91%;
-  --card-border: 240 5% 16%;
+  /* Card Background - Charcoal (#161B26) */
+  --card: 221 27% 12%;
+  --card-foreground: 210 40% 96%;
+  --card-border: 215 25% 17%;
 
-  --popover: 223 21% 11%;
-  --popover-foreground: 214 32% 91%;
-  --popover-border: 240 5% 16%;
+  --popover: 221 27% 12%;
+  --popover-foreground: 210 40% 96%;
+  --popover-border: 215 25% 17%;
 
   /* Electric Cyan Accent */
   --primary: 199 95% 60%;
-  --primary-foreground: 222 30% 6%;
+  --primary-foreground: 220 35% 7%;
 
-  --secondary: 223 21% 15%;
-  --secondary-foreground: 214 32% 91%;
+  --secondary: 221 27% 16%;
+  --secondary-foreground: 210 40% 96%;
 
-  --muted: 223 21% 10%;
+  --muted: 220 35% 10%;
   /* Muted Secondary Text - Slate 400 (#94A3B8) */
-  --muted-foreground: 215 25% 65%;
+  --muted-foreground: 215 20% 65%;
 
   --accent: 199 95% 60%;
-  --accent-foreground: 222 30% 6%;
+  --accent-foreground: 220 35% 7%;
 
   --destructive: 0 84% 60%;
   --destructive-foreground: 210 40% 98%;
@@ -94,46 +94,46 @@
   --radius: 0.5rem;
 
   --primary-border: hsl(199 95% 60%);
-  --secondary-border: hsl(223 21% 15%);
-  --muted-border: hsl(223 21% 10%);
+  --secondary-border: hsl(221 27% 16%);
+  --muted-border: hsl(220 35% 10%);
   --accent-border: hsl(199 95% 60%);
   --destructive-border: hsl(0 84% 60%);
 }
 
 .dark {
-  --background: 222 30% 6%;
-  --foreground: 214 32% 91%;
+  --background: 220 35% 7%;
+  --foreground: 210 40% 96%;
 
-  --border: 240 5% 16%;
-  --input: 240 5% 16%;
+  --border: 215 25% 17%;
+  --input: 215 25% 17%;
   --ring: 199 95% 60%;
 
-  --card: 223 21% 11%;
-  --card-foreground: 214 32% 91%;
-  --card-border: 240 5% 16%;
+  --card: 221 27% 12%;
+  --card-foreground: 210 40% 96%;
+  --card-border: 215 25% 17%;
 
-  --popover: 223 21% 11%;
-  --popover-foreground: 214 32% 91%;
-  --popover-border: 240 5% 16%;
+  --popover: 221 27% 12%;
+  --popover-foreground: 210 40% 96%;
+  --popover-border: 215 25% 17%;
 
   --primary: 199 95% 60%;
-  --primary-foreground: 222 30% 6%;
+  --primary-foreground: 220 35% 7%;
 
-  --secondary: 223 21% 15%;
-  --secondary-foreground: 214 32% 91%;
+  --secondary: 221 27% 16%;
+  --secondary-foreground: 210 40% 96%;
 
-  --muted: 223 21% 10%;
-  --muted-foreground: 215 25% 65%;
+  --muted: 220 35% 10%;
+  --muted-foreground: 215 20% 65%;
 
   --accent: 199 95% 60%;
-  --accent-foreground: 222 30% 6%;
+  --accent-foreground: 220 35% 7%;
 
   --destructive: 0 84% 60%;
   --destructive-foreground: 210 40% 98%;
 
   --primary-border: hsl(199 95% 60%);
-  --secondary-border: hsl(223 21% 15%);
-  --muted-border: hsl(223 21% 10%);
+  --secondary-border: hsl(221 27% 16%);
+  --muted-border: hsl(220 35% 10%);
   --accent-border: hsl(199 95% 60%);
   --destructive-border: hsl(0 84% 60%);
 }
@@ -179,10 +179,10 @@
 
 /* Matte flat card layout */
 .card-neon {
-  border: 1px solid hsl(240 5% 16%);
-  background-color: hsl(223 21% 11%);
+  border: 1px solid hsl(215 25% 17%);
+  background-color: hsl(221 27% 12%);
   transition: border-color 0.3s ease;
 }
 .card-neon:hover {
-  border-color: hsl(199 95% 60% / 0.2);
+  border-color: hsl(199 95% 60% / 0.25);
 }

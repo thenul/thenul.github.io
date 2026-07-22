@@ -43,7 +43,7 @@ export function CertificatesSection() {
   ];
 
   return (
-    <section id="certificates" className="py-20 relative border-t border-zinc-800 bg-[#0d0f14]/50">
+    <section id="certificates" className="py-20 relative border-t border-slate-800 bg-[#0b0f17]/50">
       <div className="max-w-5xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -52,11 +52,11 @@ export function CertificatesSection() {
           transition={{ duration: 0.6 }}
           className="mb-12"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500 flex items-center gap-4">
-            <span className="w-8 h-[2px] bg-gradient-to-r from-cyan-400 to-blue-500 block" />
+          <h2 className="text-3xl md:text-4xl font-bold text-slate-100 flex items-center gap-4 font-['Space_Grotesk']">
+            <span className="w-8 h-[2px] bg-slate-200 block" />
             Certificates &amp; Licenses
           </h2>
-          <p className="mt-3 text-sm font-mono text-muted-foreground/60">
+          <p className="mt-3 text-sm font-mono text-slate-400">
             Verified professional credentials and technical specializations
           </p>
         </motion.div>
@@ -71,34 +71,34 @@ export function CertificatesSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="bg-[#161922] border border-zinc-800 rounded-xl p-6 flex flex-col justify-between hover:border-cyan-500/20 transition-all duration-300 group"
+                className="bg-[#161B26] border border-slate-800 rounded-xl p-6 flex flex-col justify-between hover:border-slate-700 transition-all duration-300 group"
               >
                 <div>
                   <div className="flex items-start justify-between mb-4">
                     <div className="w-10 h-10 rounded-lg bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
                       <Icon className="w-5 h-5 text-cyan-400" />
                     </div>
-                    <span className="text-[10px] font-mono tracking-wider uppercase bg-cyan-500/5 text-cyan-400 border border-cyan-500/20 px-2 py-0.5 rounded">
+                    <span className="text-[10px] font-mono tracking-wider uppercase bg-cyan-500/5 text-cyan-400 border border-cyan-500/25 px-2 py-0.5 rounded">
                       {cert.status}
                     </span>
                   </div>
                   
-                  <h3 className="text-lg font-bold text-[#E2E8F0] mb-2 leading-snug group-hover:text-cyan-300 transition-colors">
+                  <h3 className="text-lg font-bold text-slate-100 mb-2 leading-snug group-hover:text-cyan-455 transition-colors">
                     {cert.title}
                   </h3>
                   
                   <div className="space-y-1 mt-3">
                     <div className="flex justify-between text-xs">
-                      <span className="text-muted-foreground">Issuer</span>
-                      <span className="text-slate-300 font-medium">{cert.issuer}</span>
+                      <span className="text-slate-400">Issuer</span>
+                      <span className="text-slate-200 font-medium">{cert.issuer}</span>
                     </div>
                     <div className="flex justify-between text-xs">
-                      <span className="text-muted-foreground">Date</span>
-                      <span className="text-slate-300 font-medium">{cert.date}</span>
+                      <span className="text-slate-400">Date</span>
+                      <span className="text-slate-200 font-medium">{cert.date}</span>
                     </div>
                     <div className="flex justify-between text-xs">
-                      <span className="text-muted-foreground">Credential ID</span>
-                      <span className="text-cyan-500/80 font-mono font-medium">{cert.id}</span>
+                      <span className="text-slate-400">Credential ID</span>
+                      <span className="text-cyan-400/90 font-mono font-medium">{cert.id}</span>
                     </div>
                   </div>
                 </div>
@@ -107,7 +107,7 @@ export function CertificatesSection() {
                   href={cert.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-6 w-full py-2 rounded-lg bg-[#1a1d26] border border-zinc-800 hover:border-cyan-500/30 text-xs font-mono font-semibold tracking-wide text-[#E2E8F0] hover:text-cyan-300 transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer"
+                  className="mt-6 w-full py-2 rounded-lg bg-[#1a1d26] border border-slate-800 hover:border-cyan-500/25 text-xs font-mono font-semibold tracking-wide text-slate-100 hover:text-cyan-300 transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer"
                 >
                   <ExternalLink className="w-3.5 h-3.5" />
                   <span>Show Credential</span>

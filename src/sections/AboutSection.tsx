@@ -11,8 +11,8 @@ export function AboutSection() {
           viewport={{ once: true, margin: '-100px' }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-12 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500 flex items-center gap-4">
-            <span className="w-8 h-[2px] bg-gradient-to-r from-cyan-400 to-blue-500 block" />
+          <h2 className="text-3xl md:text-4xl font-bold mb-12 text-slate-100 flex items-center gap-4 font-['Space_Grotesk']">
+            <span className="w-8 h-[2px] bg-slate-200 block" />
             About
           </h2>
 
@@ -26,12 +26,10 @@ export function AboutSection() {
                 transition={{ duration: 0.6, delay: 0.1 }}
                 className="relative group"
               >
-                {/* Accent neon glow background layer */}
-                <div className="absolute -inset-0.5 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full blur opacity-30 group-hover:opacity-50 transition duration-500"></div>
                 <img 
                   src="/profile.jpeg" 
                   alt="Thenul de Mel profile" 
-                  className="relative rounded-full aspect-square object-cover border-2 border-cyan-500/30 shadow-[0_0_20px_rgba(6,182,212,0.15)] w-64 h-64 md:w-full md:h-full max-w-[280px]"
+                  className="rounded-full aspect-square object-cover border border-slate-700/50 w-64 h-64 md:w-full md:h-full max-w-[280px]"
                 />
               </motion.div>
             </div>
@@ -43,7 +41,7 @@ export function AboutSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.2 }}
-                className="space-y-5 text-base text-muted-foreground leading-relaxed"
+                className="space-y-5 text-base text-slate-400 leading-relaxed font-light"
               >
                 <p>
                   My journey into electronics started with a simple curiosity: how do things actually work at the lowest level? That question led me to pursue Electronics Engineering at the University of Technology Sydney, where I've immersed myself in the world of hardware — from bare-metal microcontrollers to custom PCB layouts.
