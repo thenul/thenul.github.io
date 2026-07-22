@@ -72,7 +72,7 @@ export function ProjectsSection() {
                         </div>
                       </div>
                     ) : (
-                      <div className="rounded-lg border border-dashed border-slate-800 bg-slate-950/40 flex flex-col items-center justify-center p-8 text-muted-foreground group-hover:border-cyan-500/30 transition-colors min-h-[180px]">
+                      <div className="rounded-lg border border-dashed border-slate-850 bg-slate-950/40 flex flex-col items-center justify-center p-8 text-muted-foreground group-hover:border-cyan-500/30 transition-colors min-h-[180px]">
                         <Camera className="w-8 h-8 mb-3 text-cyan-500/40" />
                         <span className="font-mono text-xs tracking-widest text-cyan-500/50">[ Circuit Preview ]</span>
                       </div>
@@ -86,7 +86,7 @@ export function ProjectsSection() {
                       </h3>
                       
                       {project.subtitle && (
-                        <p className="text-xs text-slate-400 font-mono mb-3 px-6 text-[#38BDF8]">
+                        <p className="text-xs text-slate-400 font-mono mb-3 px-6 text-cyan-400/80">
                           {project.subtitle}
                         </p>
                       )}
@@ -94,7 +94,7 @@ export function ProjectsSection() {
                       {/* Tags list */}
                       <div className="flex flex-wrap gap-2 mb-4 px-6">
                         {project.tags.map(tag => (
-                          <span key={tag} className="px-2 py-0.5 rounded bg-[#1E293B] border border-slate-800 text-slate-300 font-mono text-[10px] tracking-wider">
+                          <span key={tag} className="px-2 py-0.5 rounded bg-cyan-500/5 border border-cyan-500/10 text-cyan-400 font-mono text-[10px] tracking-wider">
                             {tag}
                           </span>
                         ))}
@@ -210,7 +210,7 @@ export function ProjectsSection() {
                           <div className="font-mono text-xs leading-relaxed whitespace-pre text-slate-300 w-full max-h-[350px] overflow-y-auto pr-2">
                             {project.code.split('\n').map((line, i) => (
                               <div key={i} className="flex gap-4">
-                                <span className="text-slate-600 select-none w-5 text-right flex-shrink-0">{i + 1}</span>
+                                <span className="text-zinc-655 select-none w-5 text-right flex-shrink-0">{i + 1}</span>
                                 <span>{line}</span>
                               </div>
                             ))}

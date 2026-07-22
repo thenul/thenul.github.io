@@ -75,7 +75,7 @@ export function CertificatesSection() {
               >
                 <div>
                   <div className="flex items-start justify-between mb-4">
-                    <div className="w-10 h-10 rounded-lg bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
+                    <div className="w-10 h-10 rounded-lg bg-cyan-500/10 border border-cyan-550/20 flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
                       <Icon className="w-5 h-5 text-cyan-400" />
                     </div>
                     <span className="text-[10px] font-mono tracking-wider uppercase bg-cyan-500/5 text-cyan-400 border border-cyan-500/25 px-2 py-0.5 rounded">
