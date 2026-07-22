@@ -9,24 +9,28 @@ export function ContactSection() {
         
         <div className="flex items-center gap-8 mb-12">
           <a
-            href="#"
-            className="p-3 rounded-full bg-secondary border border-white/5 text-muted-foreground hover:text-primary hover:border-primary/50 glow-primary-hover transition-all"
+            href="https://github.com/thenul"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="p-3 rounded-full bg-secondary border border-white/5 text-muted-foreground hover:text-primary hover:border-primary/50 transition-all"
             aria-label="GitHub"
             data-testid="link-github"
           >
             <Github className="w-6 h-6" />
           </a>
           <a
-            href="#"
-            className="p-3 rounded-full bg-secondary border border-white/5 text-muted-foreground hover:text-primary hover:border-primary/50 glow-primary-hover transition-all"
+            href="https://www.linkedin.com/in/thenul-de-mel-01154a203/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="p-3 rounded-full bg-secondary border border-white/5 text-muted-foreground hover:text-primary hover:border-primary/50 transition-all"
             aria-label="LinkedIn"
             data-testid="link-linkedin"
           >
             <Linkedin className="w-6 h-6" />
           </a>
           <a
-            href="mailto:thenul@example.com"
-            className="p-3 rounded-full bg-secondary border border-white/5 text-muted-foreground hover:text-primary hover:border-primary/50 glow-primary-hover transition-all"
+            href="mailto:thenuldemelde@gmail.com"
+            className="p-3 rounded-full bg-secondary border border-white/5 text-muted-foreground hover:text-primary hover:border-primary/50 transition-all"
             aria-label="Email"
             data-testid="link-email"
           >

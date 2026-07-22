@@ -14,12 +14,11 @@ export function HeroSection() {
           initial={{ scale: 0.8, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="relative w-32 h-32 md:w-40 md:h-40 mb-8 rounded-full flex items-center justify-center glow-primary"
-          style={{ background: 'linear-gradient(135deg, rgba(0,210,255,0.15), rgba(77,142,255,0.15))', border: '1px solid rgba(0,210,255,0.3)' }}
+          className="relative w-32 h-32 md:w-40 md:h-40 mb-8 rounded-full flex items-center justify-center glow-primary bg-[#161922]/50 border border-cyan-500/20"
         >
           <Cpu className="w-12 h-12 text-primary" />
-          <div className="absolute inset-0 rounded-full border border-transparent animate-[spin_10s_linear_infinite]" style={{ borderTopColor: 'rgba(0,210,255,0.8)', borderRightColor: 'rgba(77,142,255,0.3)' }} />
-          <div className="absolute inset-[-8px] rounded-full border border-transparent animate-[spin_15s_linear_infinite_reverse]" style={{ borderTopColor: 'rgba(77,142,255,0.4)' }} />
+          <div className="absolute inset-0 rounded-full border border-transparent animate-[spin_10s_linear_infinite]" style={{ borderTopColor: 'rgba(56,189,248,0.8)', borderRightColor: 'rgba(59,130,246,0.2)' }} />
+          <div className="absolute inset-[-8px] rounded-full border border-transparent animate-[spin_15s_linear_infinite_reverse]" style={{ borderTopColor: 'rgba(56,189,248,0.25)' }} />
         </motion.div>
 
         <motion.h1

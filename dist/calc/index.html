@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PhasorZ — Instant AC Impedance Calculator</title>
+    <style>
+        :root {
+            --bg-color: #0d0e12;
+            --card-bg: #18181c;
+            --accent: #6366f1;
+            --accent-hover: #4f46e5;
+            --text: #f4f4f5;
+            --text-muted: #a1a1aa;
+            --border: #27272a;
+            --chrome-btn: #312e81;
+            --chrome-btn-hover: #3730a3;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-sizing: border-box;
+
+            /* Technical Grid + Subtle Radial Glow */
+            background-image: 
+                radial-gradient(circle at center, rgba(99, 102, 241, 0.15) 0%, transparent 65%),
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 100% 100%, 32px 32px, 32px 32px;
+            background-position: 0 0, -1px -1px, -1px -1px;
+        }
+
+        .layout-container {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            max-width: 960px;
+            width: 100%;
+            padding: 40px 24px;
+            box-sizing: border-box;
+            align-items: center;
+        }
+
+        @media (min-width: 868px) {
+            .layout-container {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: flex-start;
+            }
+        }
+
+        /* --- Left Column: Info & CTA --- */
+        .hero-content {
+            flex: 1;
+            max-width: 480px;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(99, 102, 241, 0.12);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            color: #818cf8;
+            font-size: 0.78rem;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 20px;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .badge-dot {
+            width: 6px;
+            height: 6px;
+            background-color: #22c55e;
+            border-radius: 50%;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin: 0 0 12px 0;
+            letter-spacing: -1px;
+            color: #ffffff;
+            line-height: 1.1;
+        }
+
+        p.description {
+            font-size: 1rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+            margin: 0 0 24px 0;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: var(--accent);
+            color: #fff;
+            font-weight: 600;
+            font-size: 0.95rem;
+            padding: 12px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 14px rgba(99, 102, 241, 0.35);
+            margin-bottom: 32px;
+        }
+
+        .cta-button:hover {
+            background: var(--accent-hover);
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.5);
+        }
+
+        .cta-button svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 28px 0;
+        }
+
+        .feature-list li {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .feature-list li span {
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        /* Legend Table */
+        .legend-card {
+            background: #111115;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 14px 16px;
+        }
+
+        .legend-title {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 10px;
+            letter-spacing: 0.5px;
+        }
+
+        .legend-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            font-family: monospace;
+            font-size: 0.8rem;
+        }
+
+        .legend-item {
+            background: #09090b;
+            padding: 6px 8px;
+            border-radius: 4px;
+            border: 1px solid rgba(255,255,255,0.05);
+            text-align: center;
+            color: #d4d4d8;
+        }
+
+        /* --- Right Column: Calculator Card --- */
+        .calculator-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            width: 100%;
+            max-width: 360px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+            box-sizing: border-box;
+        }
+
+        .card-header {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-top: 0;
+            text-align: center;
+            color: #fff;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 12px;
+            margin-bottom: 16px;
+        }
+
+        label { 
+            display: block; 
+            font-size: 0.8rem; 
+            color: var(--text-muted); 
+            margin-bottom: 4px; 
+        }
+
+        input, select { 
+            width: 100%; 
+            padding: 10px; 
+            background: #09090b; 
+            border: 1px solid var(--border); 
+            border-radius: 6px; 
+            color: #fff; 
+            font-size: 0.9rem; 
+            box-sizing: border-box; 
+            margin-bottom: 12px; 
+            transition: border-color 0.2s;
+        }
+
+        input:focus, select:focus { 
+            outline: none; 
+            border-color: var(--accent); 
+        }
+
+        button.action-btn { 
+            width: 100%; 
+            padding: 11px; 
+            background: var(--accent); 
+            border: none; 
+            border-radius: 6px; 
+            color: #fff; 
+            font-weight: 600; 
+            cursor: pointer; 
+            transition: background 0.2s;
+        }
+
+        button.action-btn:hover { 
+            background: var(--accent-hover); 
+        }
+
+        button.secondary { 
+            background: #27272a; 
+            border: 1px solid var(--border); 
+            margin-top: 12px; 
+        }
+
+        button.secondary:hover { 
+            background: #3f3f46; 
+        }
+
+        .display-box { 
+            background: #09090b; 
+            border: 1px solid var(--border); 
+            border-radius: 8px; 
+            padding: 14px; 
+            margin-top: 14px; 
+        }
+
+        .result-line { 
+            font-family: 'Courier New', Courier, monospace; 
+            font-size: 0.9rem; 
+            margin: 6px 0; 
+            word-break: break-all;
+        }
+
+        .error { 
+            color: #ef4444; 
+            font-size: 0.75rem; 
+            margin-top: -8px; 
+            margin-bottom: 10px; 
+            display: none; 
+        }
+
+        .footer { 
+            text-align: center; 
+            font-size: 0.75rem; 
+            color: var(--text-muted); 
+            margin-top: 18px; 
+            border-top: 1px solid var(--border); 
+            padding-top: 10px; 
+        }
+
+        .footer-name { 
+            color: var(--accent); 
+            font-weight: bold; 
+        }
+    </style>
+</head>
+<body>
+
+<div class="layout-container">
+
+    <!-- LEFT COLUMN: Landing & CTA -->
+    <div class="hero-content">
+        <div class="badge">
+            <span class="badge-dot"></span> Live on Chrome Web Store
+        </div>
+        
+        <h1>PhasorZ</h1>
+        <p class="description">
+            A lightweight AC network impedance calculator designed for electrical engineering labs. Calculate complex series and parallel impedance directly from your browser toolbar.
+        </p>
+
+        <a href="https://chromewebstore.google.com/detail/phasorz/hlanpmlkdggjkapemgcncpjbenpbohej" target="_blank" class="cta-button">
+            <svg viewBox="0 0 24 24">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/>
+                <path d="M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm0 6c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/>
+            </svg>
+            Add to Chrome — Free
+        </a>
+
+        <ul class="feature-list">
+            <li><span>✓</span> Auto-parses datasheet shorthand (e.g., 4.7k, 10u, 22n)</li>
+            <li><span>✓</span> Dynamic Rectangular (R + jX) & Polar (Mag ∠ Angle°) outputs</li>
+            <li><span>✓</span> Locked system frequency for dynamic reactance calculations</li>
+        </ul>
+
+        <div class="legend-card">
+            <div class="legend-title">Supported Engineering Shorthand</div>
+            <div class="legend-grid">
+                <div class="legend-item">4.7k → 4,700</div>
+                <div class="legend-item">10u → 0.00001</div>
+                <div class="legend-item">22n → 22e-9</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- RIGHT COLUMN: Calculator Widget -->
+    <div class="calculator-card">
+        <div class="card-header">Interactive Calculator</div>
+        
+        <label for="frequency">System Frequency (Hz)</label>
+        <input type="text" id="frequency" value="1k">
+        <div id="freq-error" class="error">Invalid frequency format</div>
+
+        <label for="comp-type">Component Type</label>
+        <select id="comp-type">
+            <option value="R">Resistor (Ω)</option>
+            <option value="L">Inductor (H)</option>
+            <option value="C">Capacitor (F)</option>
+        </select>
+
+        <label for="comp-value">Value (e.g., 4.7k, 10u)</label>
+        <input type="text" id="comp-value" placeholder="e.g., 4.7k">
+        <div id="val-error" class="error">Invalid value format</div>
+
+        <div id="connection-container" style="display: none;">
+            <label for="comp-conn">Connection Type</label>
+            <select id="comp-conn">
+                <option value="s">Series</option>
+                <option value="p">Parallel</option>
+            </select>
+        </div>
+
+        <button class="action-btn" id="add-btn">Add Component</button>
+
+        <div class="display-box">
+            <div class="result-line" id="rect-output">Rectangular: 0.00 + 0.00j Ω</div>
+            <div class="result-line" id="polar-output">Polar: 0.00 ∠ 0.00°</div>
+            <div style="margin-top: 8px; font-size: 0.75rem; color: var(--text-muted);" id="freq-display">Frequency: 1,000.00 Hz</div>
+        </div>
+
+        <button class="action-btn secondary" id="reset-btn">Reset Network</button>
+        
+        <div class="footer">
+            Created by <span class="footer-name">TDM</span>
+        </div>
+    </div>
+
+</div>
+
+<script>
+let totalZ = null; 
+let sysFrequency = 1000;
+
+const prefixes = { 'p': 1e-12, 'n': 1e-9, 'u': 1e-6, 'm': 1e-3, 'k': 1e3, 'M': 1e6, 'G': 1e9 };
+
+function parseEngineeringNotation(str) {
+    str = str.trim();
+    if (!str) throw new Error("Empty");
+    const lastChar = str.slice(-1);
+    if (prefixes[lastChar]) {
+        const numPart = parseFloat(str.slice(0, -1));
+        if (isNaN(numPart)) throw new Error("NaN");
+        return numPart * prefixes[lastChar];
+    }
+    const num = parseFloat(str);
+    if (isNaN(num)) throw new Error("NaN");
+    return num;
+}
+
+function lockFrequency() {
+    const input = document.getElementById('frequency').value;
+    const errorDiv = document.getElementById('freq-error');
+    try {
+        const val = parseEngineeringNotation(input);
+        if (val < 0) throw new Error("Negative");
+        sysFrequency = val;
+        errorDiv.style.display = 'none';
+        document.getElementById('freq-display').innerText = `Frequency: ${sysFrequency.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})} Hz`;
+        resetSystem(); 
+    } catch (e) {
+        errorDiv.style.display = 'block';
+    }
+}
+
+function reciprocal(z) {
+    if (z.re === Infinity || z.im === Infinity) return { re: 0, im: 0 };
+    const denom = z.re * z.re + z.im * z.im;
+    if (denom === 0) return { re: Infinity, im: 0 };
+    return { re: z.re / denom, im: -z.im / denom };
+}
+
+function addComponent() {
+    const type = document.getElementById('comp-type').value;
+    const valStr = document.getElementById('comp-value').value;
+    const conn = document.getElementById('comp-conn').value;
+    const errorDiv = document.getElementById('val-error');
+
+    let val;
+    try {
+        val = parseEngineeringNotation(valStr);
+        if (val < 0) throw new Error("Negative");
+        errorDiv.style.display = 'none';
+    } catch (e) {
+        errorDiv.style.display = 'block';
+        return;
+    }
+
+    let newZ = { re: 0, im: 0 };
+    const omega = 2 * Math.PI * sysFrequency;
+
+    if (type === 'R') {
+        newZ.re = val;
+    } else if (type === 'L') {
+        newZ.im = omega * val;
+    } else if (type === 'C') {
+        if (omega === 0) {
+            newZ.re = Infinity;
+        } else {
+            newZ.im = -1 / (omega * val);
+        }
+    }
+
+    if (totalZ === null) {
+        totalZ = newZ;
+        document.getElementById('connection-container').style.display = 'block';
+        document.getElementById('frequency').disabled = true;
+    } else {
+        if (conn === 's') {
+            totalZ.re += newZ.re;
+            totalZ.im += newZ.im;
+        } else {
+            if ((totalZ.re === 0 && totalZ.im === 0) || (newZ.re === 0 && newZ.im === 0)) {
+                totalZ = { re: 0, im: 0 };
+            } else {
+                const y1 = reciprocal(totalZ);
+                const y2 = reciprocal(newZ);
+                const yTotal = { re: y1.re + y2.re, im: y1.im + y2.im };
+                totalZ = reciprocal(yTotal);
+            }
+        }
+    }
+
+    updateDisplay();
+    document.getElementById('comp-value').value = ''; 
+}
+
+function updateDisplay() {
+    const rectEl = document.getElementById('rect-output');
+    const polarEl = document.getElementById('polar-output');
+
+    if (totalZ === null) {
+        rectEl.innerText = "Rectangular: 0.00 + 0.00j Ω";
+        polarEl.innerText = "Polar: 0.00 ∠ 0.00°";
+        return;
+    }
+
+    if (totalZ.re === Infinity || Math.abs(totalZ.re) > 1e12 || Math.abs(totalZ.im) > 1e12) {
+        rectEl.innerText = "Rectangular: ∞ Ω (Open Circuit)";
+        polarEl.innerText = "Polar: ∞ ∠ 0.00°";
+        return;
+    }
+
+    const sign = totalZ.im >= 0 ? '+' : '-';
+    rectEl.innerText = `Rectangular: ${totalZ.re.toFixed(2)} ${sign} ${Math.abs(totalZ.im).toFixed(2)}j Ω`;
+
+    const mag = Math.sqrt(totalZ.re * totalZ.re + totalZ.im * totalZ.im);
+    let angle = Math.atan2(totalZ.im, totalZ.re) * (180 / Math.PI);
+    polarEl.innerText = `Polar: ${mag.toFixed(2)} ∠ ${angle.toFixed(2)}°`;
+}
+
+function resetSystem() {
+    totalZ = null;
+    document.getElementById('connection-container').style.display = 'none';
+    document.getElementById('frequency').disabled = false;
+    updateDisplay();
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('frequency').addEventListener('change', lockFrequency);
+    document.getElementById('add-btn').addEventListener('click', addComponent);
+    document.getElementById('reset-btn').addEventListener('click', resetSystem);
+});
+</script>
+
+</body>
+</html>

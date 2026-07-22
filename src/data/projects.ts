@@ -3,9 +3,15 @@ export interface ProjectTask {
   desc: string;
 }
 
+export interface ProjectLink {
+  name: string;
+  url: string;
+}
+
 export interface Project {
   id: string;
   title: string;
+  subtitle?: string;
   description: string;
   tags: string[];
   tasks?: ProjectTask[];
@@ -14,6 +20,7 @@ export interface Project {
   code: string;
   filename: string;
   schematicUrl?: string;
+  links?: ProjectLink[];
 }
 
 export const projects: Project[] = [
@@ -172,41 +179,71 @@ void stopMotors() {
 }`
   },
   {
-    id: "beta",
-    title: "IoT Smart Weather Station (ESP32 & FreeRTOS)",
-    description: "A high-efficiency meteorological monitoring hub utilizing an ESP32 microprocessor. The system manages sensor data readings, network transactions, and low-power sleep schedules via a preemptive real-time operating system scheduler (FreeRTOS).\n\n• Multi-task synchronization using FreeRTOS queues.\n• Hardware interfaces: I2C for SHT31 sensor, SPI for SD Logging.\n• Dynamic sleep profiling saving 80% battery capacity.",
-    tags: ["FreeRTOS", "ESP32", "I2C", "C++", "Sensors"],
-    filename: "weather_station.cpp",
-    code: `#include <Arduino.h>
-#include <WiFi.h>
-#include "DHTesp.h"
+    id: "phasorz",
+    title: "PhasorZ — AC Network & Complex Impedance Engine",
+    subtitle: "Dark-mode Manifest V3 Chrome Extension & Web App for Electrical Engineering Labs",
+    description: "Engineered a real-time AC complex impedance calculator designed to eliminate manual vector conversions and tab-switching during EE lab experiments.\n\n• Datasheet Shorthand Parser: Built an inline input lexer that converts engineering shorthand notation (e.g., 4.7k, 10u, 22n) into floating-point SI values on the fly.\n• Complex Math Engine: Computes series/parallel R, L, C network impedances by evaluating inductive (X_L = 2πfL) and capacitive (X_C = 1 / (2πfC)) reactances at locked operating frequencies.\n• Dual Vector Output: Calculates simultaneous real-time output in Rectangular (R + jX Ω) and Polar (|Z| ∠ θ°) forms with phase angle normalization.\n• Reactive State Analysis: Dynamically classifies circuit phase response as net-inductive, net-capacitive, or resonant based on calculated phase angle θ.\n• Manifest V3 Deployment: Prototyped and validated in Python before porting to lightweight vanilla JavaScript. Fully published on the Chrome Web Store and hosted live.",
+    tags: ["JavaScript (ES6+)", "Chrome Extension (Manifest V3)", "Python", "HTML5/CSS3", "Complex Analysis"],
+    image: "/phasorz.png",
+    imageBadge: "Chrome Web Store Published",
+    filename: "impedance_engine.js",
+    code: `// PhasorZ: AC Complex Impedance Calculation Engine
+// Parses engineering shorthand notation and evaluates RLC networks.
 
-TaskHandle_t SensorTaskHandle = NULL;
-QueueHandle_t SensorQueue;
-
-void readSensorTask(void *pvParameters) {
-  DHTesp dht;
-  dht.setup(23, DHTesp::DHT22);
-  for(;;) {
-    float temp = dht.getTemperature();
-    xQueueSend(SensorQueue, &temp, portMAX_DELAY);
-    vTaskDelay(pdMS_TO_TICKS(2000));
+class Complex {
+  constructor(re, im) {
+    this.re = re;
+    this.im = im;
   }
-}`
-  },
-  {
-    id: "gamma",
-    title: "Digital Signal Processor Audio Filter (MATLAB)",
-    description: "Design of FIR and IIR filters to filter out high-frequency noise from audio streams inside MATLAB environments. Analyzes pre- and post-filtered power spectral density maps to verify filter isolation integrity.\n\n• Hamming-window FIR design algorithms.\n• Frequency response & phase plots analysis.\n• Convolution filtration matrix functions.",
-    tags: ["MATLAB", "DSP Filter", "FIR / IIR", "Audio FFT"],
-    filename: "dsp_filter.m",
-    code: `% MATLAB script to design FIR Lowpass Filter
-Fs = 44100;           % Sampling Frequency (Hz)
-Fc = 3000;            % Cutoff Frequency (Hz)
-N = 64;               % Filter Order
 
-Wc = Fc / (Fs / 2);   % Normalized Cutoff
-h = fir1(N, Wc, 'low', hamming(N+1));
-filteredAudio = filter(h, 1, noisyInputSignal);`
+  add(c) {
+    return new Complex(this.re + c.re, this.im + c.im);
+  }
+
+  parallel(c) {
+    // Z_p = (Z_1 * Z_2) / (Z_1 + Z_2)
+    const num_re = this.re * c.re - this.im * c.im;
+    const num_im = this.re * c.im + this.im * c.re;
+    const den_re = this.re + c.re;
+    const den_im = this.im + c.im;
+    const den = den_re * den_re + den_im * den_im;
+    if (den === 0) return new Complex(0, 0);
+    return new Complex(
+      (num_re * den_re + num_im * den_im) / den,
+      (num_im * den_re - num_re * den_im) / den
+    );
+  }
+
+  toPolar() {
+    const magnitude = Math.sqrt(this.re * this.re + this.im * this.im);
+    const angleRad = Math.atan2(this.im, this.re);
+    const angleDeg = (angleRad * 180) / Math.PI;
+    return { r: magnitude, theta: angleDeg };
+  }
+}
+
+// Parses shorthand string like "4.7k", "10u", "22n" into float
+function parseShorthand(valStr) {
+  const match = valStr.trim().match(/^([0-9.]+)\\s*([a-zA-Z]*)$/);
+  if (!match) return NaN;
+  const num = parseFloat(match[1]);
+  const unit = match[2].toLowerCase();
+  
+  const multipliers = {
+    'm': 1e-3,  // milli
+    'u': 1e-6,  // micro
+    'n': 1e-9,  // nano
+    'p': 1e-12, // pico
+    'k': 1e3,   // kilo
+    'meg': 1e6, // mega
+    'mhz': 1e6  // megahertz
+  };
+  
+  return multipliers[unit] ? num * multipliers[unit] : num;
+}`,
+    links: [
+      { name: "Chrome Web Store", url: "https://chromewebstore.google.com/detail/phasorz/hlanpmlkdggjkapemgcncpjbenpbohej" },
+      { name: "Live Web App", url: "https://thenuldemel.com/calc" }
+    ]
   }
 ];

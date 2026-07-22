@@ -1,34 +1,49 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Award, ShieldAlert, Cpu, Layers } from 'lucide-react';
+import { Award, Cpu, Blocks, FileCheck, ExternalLink } from 'lucide-react';
 
 export function CertificatesSection() {
-  const placeholders = [
+  const credentials = [
     {
-      title: "Embedded Systems & Real-Time Kernel Development",
-      issuer: "LinkedIn Learning / Technical Specialization",
-      status: "Upcoming Certification",
-      desc: "Focusing on preemptive scheduling interfaces, memory management routines, and task synchronization matrices in FreeRTOS environments.",
+      title: "Google AI Essentials Specialization",
+      issuer: "Google",
+      date: "Jul 2025",
+      id: "3WLB08KYLQNH",
+      status: "COMPLETED",
+      link: "https://www.linkedin.com/in/thenul-de-mel-01154a203/",
       icon: Cpu,
     },
     {
-      title: "Altium Designer PCB Routing & Signal Isolation",
-      issuer: "Altium Academic / Board Design",
-      status: "Upcoming Certification",
-      desc: "PCB track geometry, multi-layer stack-up planning, thermal relief management, and high-frequency digital signal isolation policies.",
-      icon: Layers,
+      title: "Rapid Prototyping Using 3D Printing Specialization",
+      issuer: "Arizona State University",
+      date: "Apr 2025",
+      id: "19ZYQ1DTQAY4",
+      status: "COMPLETED",
+      link: "https://www.linkedin.com/in/thenul-de-mel-01154a203/",
+      icon: Blocks,
     },
     {
-      title: "UTS Practical Engineering License & Safety Core",
-      issuer: "University of Technology Sydney",
-      status: "Completed / Academic Core",
-      desc: "Laboratory instrumentation safety protocols, high-voltage handling rules, precision soldering guidelines, and signal debug procedures.",
+      title: "Introduction to Artificial Intelligence (AI)",
+      issuer: "IBM",
+      date: "Apr 2025",
+      id: "96S94GE7UADO",
+      status: "COMPLETED",
+      link: "https://www.linkedin.com/in/thenul-de-mel-01154a203/",
       icon: Award,
+    },
+    {
+      title: "Python Data Structures",
+      issuer: "University of Michigan",
+      date: "Apr 2025",
+      id: "RH8IDW3RB1QM",
+      status: "COMPLETED",
+      link: "https://www.linkedin.com/in/thenul-de-mel-01154a203/",
+      icon: FileCheck,
     }
   ];
 
   return (
-    <section id="certificates" className="py-20 relative bg-card/10 border-t border-white/5">
+    <section id="certificates" className="py-20 relative border-t border-zinc-800 bg-[#0d0f14]/50">
       <div className="max-w-5xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -42,12 +57,12 @@ export function CertificatesSection() {
             Certificates &amp; Licenses
           </h2>
           <p className="mt-3 text-sm font-mono text-muted-foreground/60">
-            Professional technical qualifications and engineering licenses
+            Verified professional credentials and technical specializations
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {placeholders.map((cert, index) => {
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6">
+          {credentials.map((cert, index) => {
             const Icon = cert.icon;
             return (
               <motion.div
@@ -56,28 +71,47 @@ export function CertificatesSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="card-neon bg-[#0a0e1a]/85 border border-white/10 rounded-xl p-6 flex flex-col justify-between hover:border-cyan-500/30 transition-all duration-300 group"
+                className="bg-[#161922] border border-zinc-800 rounded-xl p-6 flex flex-col justify-between hover:border-cyan-500/20 transition-all duration-300 group"
               >
                 <div>
-                  <div className="w-10 h-10 rounded-lg bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center mb-5 group-hover:scale-105 transition-transform">
-                    <Icon className="w-5 h-5 text-cyan-400" />
+                  <div className="flex items-start justify-between mb-4">
+                    <div className="w-10 h-10 rounded-lg bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
+                      <Icon className="w-5 h-5 text-cyan-400" />
+                    </div>
+                    <span className="text-[10px] font-mono tracking-wider uppercase bg-cyan-500/5 text-cyan-400 border border-cyan-500/20 px-2 py-0.5 rounded">
+                      {cert.status}
+                    </span>
                   </div>
-                  <h3 className="text-lg font-bold text-white mb-2 leading-snug group-hover:text-cyan-300 transition-colors">
+                  
+                  <h3 className="text-lg font-bold text-[#E2E8F0] mb-2 leading-snug group-hover:text-cyan-300 transition-colors">
                     {cert.title}
                   </h3>
-                  <span className="text-xs font-mono text-cyan-500/70 block mb-3">
-                    {cert.issuer}
-                  </span>
-                  <p className="text-muted-foreground text-sm leading-relaxed font-light">
-                    {cert.desc}
-                  </p>
+                  
+                  <div className="space-y-1 mt-3">
+                    <div className="flex justify-between text-xs">
+                      <span className="text-muted-foreground">Issuer</span>
+                      <span className="text-slate-300 font-medium">{cert.issuer}</span>
+                    </div>
+                    <div className="flex justify-between text-xs">
+                      <span className="text-muted-foreground">Date</span>
+                      <span className="text-slate-300 font-medium">{cert.date}</span>
+                    </div>
+                    <div className="flex justify-between text-xs">
+                      <span className="text-muted-foreground">Credential ID</span>
+                      <span className="text-cyan-500/80 font-mono font-medium">{cert.id}</span>
+                    </div>
+                  </div>
                 </div>
                 
-                <div className="mt-6 pt-4 border-t border-white/5 flex items-center justify-between">
-                  <span className="text-[10px] font-mono tracking-wider uppercase bg-cyan-500/5 text-cyan-400 border border-cyan-500/20 px-2 py-0.5 rounded">
-                    {cert.status}
-                  </span>
-                </div>
+                <a
+                  href={cert.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-6 w-full py-2 rounded-lg bg-[#1a1d26] border border-zinc-800 hover:border-cyan-500/30 text-xs font-mono font-semibold tracking-wide text-[#E2E8F0] hover:text-cyan-300 transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer"
+                >
+                  <ExternalLink className="w-3.5 h-3.5" />
+                  <span>Show Credential</span>
+                </a>
               </motion.div>
             );
           })}
